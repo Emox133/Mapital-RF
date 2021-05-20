@@ -3,7 +3,8 @@ import { FeatureGroup } from 'react-leaflet';
 import { EditControl } from "react-leaflet-draw"
 
 const DrawingPanel = () => {
-    const createMapShape = (e) => {
+
+    const createGeometry = (e) => {
         switch(e.layerType) {
             case 'circle': console.log('circle')
             break;
@@ -28,7 +29,7 @@ const DrawingPanel = () => {
         <FeatureGroup>
              <EditControl
                 position='topleft'
-                onCreated={(e) => createMapShape(e)}
+                onCreated={(e) => createGeometry(e)}
                 draw={{
                     circlemarker: false
                 }}

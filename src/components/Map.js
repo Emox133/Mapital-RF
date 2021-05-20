@@ -8,7 +8,7 @@ const Map = () => {
 
     return (
         <MapContainer center={[44.44929, 18.64978]} zoom={13}>
-                <AlertDialog isOpen={open} type="info">
+                <AlertDialog isOpen={open} type="info" width="45%" timer={12}>
                     Zahvaljujemo Vam se na unapređenju Sigurnih Staza Živinice! Obeležite lokaciju na mapi, koristeći alate za crtanje u gornjem desnom uglu, dodajte fotografiju i postavite kratak opis.
                 </AlertDialog>
             <TileLayer

@@ -1,24 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
-    width: '40%',
     marginTop: '.5rem',
     position: 'absolute',
     left: '50%',
     transform: 'translate(-50%, 0)',
     zIndex: 1000,
   },
-}))
+})
 
-export default function AlertDialog({children, type, isOpen, timer = 5000}) {
+export default function AlertDialog({children, type, isOpen, width, timer = 7}) {
   const classes = useStyles();
+  const [dissapearAfter, setDissapearAfter] = useState(false)
 
-  const content = isOpen ? (
-    <div className={classes.root}>
-      <Alert severity={type} variant="filled" onClose={() => {}}>{children}</Alert>
+  setTimeout(() => {
+    setDissapearAfter(true)
+  }, timer * 1000)
+
+  const content = isOpen && !dissapearAfter ? (
+    <div className={classes.root} style={{width}}>
+      <Alert severity={type} variant="filled">{children}</Alert>
     </div>
   ) : null
 
