@@ -9,6 +9,25 @@
   width: 100vw;
 }
 
+.leaflet-top {
+  margin-top: 2rem;
+}
+
+.hidden {
+  /* display: none; BELOW STYLES ARE A WORKAROUND (KIND OF :/) */
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.sr-only {
+  display: none;
+}
+
+.leaflet-draw {
+  opacity: 0;
+  visibility: hidden;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
