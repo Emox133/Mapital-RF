@@ -27,6 +27,8 @@ const categories = [
   }
 ]
 
+let successAlert
+
 export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent}) {
   const [alertOpen, setAlertOpen] = useState(false)
 
@@ -62,10 +64,14 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
       return
     }
 
-    // 2) Send request to the server / create marker
-    factory.createMarker(mapEvent, category)
+    // 2) & 3) Create marker in DB / Close dialog
+    factory.createMarker(mapEvent, handleClose, category)
 
-    // 3) Close the dialog and inform the user about request succession
+    successAlert = (
+      <AlertDialog type="success" width="50%">
+        Vaš zahtjev je uspiješno proslijeđen.
+      </AlertDialog>
+    )
   }
 
   return (
@@ -85,7 +91,6 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
               label="Vrsta Problema"
               value={fields.category}
               onChange={handleChange}
-              // helperText="Molimo vas izaberite kategoriju problema :)"
             >
               {categories.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -140,8 +145,9 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
       </Dialog>
       {alertOpen &&
         <AlertDialog type="error" width="50%">
-          Molimo vas ispunite navedena polja.
+          Molimo vas ispunite polja ispod.
        </AlertDialog>}
+        {successAlert}
     </div>
   );
 }
