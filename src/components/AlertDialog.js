@@ -8,11 +8,12 @@ const useStyles = makeStyles({
     position: 'absolute',
     left: '50%',
     transform: 'translate(-50%, 0)',
-    zIndex: 1000,
+    zIndex: 1500,
+    textAlign: 'center'
   },
 })
 
-export default function AlertDialog({children, type, isOpen, width, timer = 7}) {
+export default function AlertDialog({children, type, isOpen = true, width, timer = 7}) {
   const classes = useStyles();
   const [dissapearAfter, setDissapearAfter] = useState(false)
 
