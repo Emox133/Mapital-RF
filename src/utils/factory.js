@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const createMarker = (e, fn, category, description) => {
+export const createMarker = (e, fn, requestFn, category, description) => {
     const {_latlng} = e.layer
     const latLng = [_latlng.lat, _latlng.lng]
     
@@ -9,7 +9,10 @@ export const createMarker = (e, fn, category, description) => {
         category
     }).then(res => {
         // CLOSE DIALOG
-        if(res.status === 201) fn()
+        if(res.status === 201) {
+            fn()
+            requestFn()
+        }
     }).catch(err => {
         console.log(err.response)
     })

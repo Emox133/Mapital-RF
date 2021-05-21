@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import DrawingPanel from './DrawingPanel'
 import EditLocationIcon from '@material-ui/icons/EditLocation';
 import {Box} from '@material-ui/core'
 import {makeStyles} from '@material-ui/styles'
+import AlertDialog from './AlertDialog'
 
 const useStyles = makeStyles({
     boxRoot: {
@@ -24,14 +25,15 @@ const useStyles = makeStyles({
     }
 })
 
-const ToggleDrawing = ({isOpen, onSetOpen}) => {
+const ToggleDrawing = () => {
+    const [open, setOpen] = useState(false)
     const classes = useStyles()
     
     const toggleHandler = () => {
         const drawingPanel = document.querySelector('.leaflet-draw')
         drawingPanel.classList.toggle('hidden')
         
-        onSetOpen(prevState => !prevState)
+        setOpen(prevState => !prevState)
     }
 
     return (
@@ -39,7 +41,10 @@ const ToggleDrawing = ({isOpen, onSetOpen}) => {
             <Box className={classes.boxRoot} onClick={toggleHandler}>
                 <EditLocationIcon />   
             </Box>
-            <DrawingPanel isOpen={isOpen} />
+            <DrawingPanel isOpen={open} />
+            <AlertDialog isOpen={open} type="success" width="45%">
+                Zahvaljujemo Vam se na unapređenju Sigurnih Staza Živinice!
+            </AlertDialog>
         </>
     )
 };

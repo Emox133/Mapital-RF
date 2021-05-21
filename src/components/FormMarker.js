@@ -27,10 +27,9 @@ const categories = [
   }
 ]
 
-let successAlert
-
 export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent}) {
   const [alertOpen, setAlertOpen] = useState(false)
+  const [requestSucceded, setRequestSucceded] = useState(false)
 
   const handleClose = () => {
     setIsOpen(false);
@@ -50,6 +49,13 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     }));
   };
 
+  const handleRequest = () => {
+    setRequestSucceded(true)
+    setTimeout(() => {
+      setRequestSucceded(false)
+    }, 3000)
+  }
+
   const handleSubmit = (e) => {
     // 0) Do other stuff
     e.preventDefault()
@@ -65,13 +71,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     }
 
     // 2) & 3) Create marker in DB / Close dialog
-    factory.createMarker(mapEvent, handleClose, category)
-
-    successAlert = (
-      <AlertDialog type="success" width="50%">
-        Vaš zahtjev je uspiješno proslijeđen.
-      </AlertDialog>
-    )
+    factory.createMarker(mapEvent, handleClose, handleRequest, category)
   }
 
   return (
@@ -147,7 +147,10 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
         <AlertDialog type="error" width="50%">
           Molimo vas ispunite polja ispod.
        </AlertDialog>}
-        {successAlert}
+      {requestSucceded &&
+        <AlertDialog>
+          Vaš zahtjev je uspiješno proslijeđen.
+        </AlertDialog>}
     </div>
   );
 }
