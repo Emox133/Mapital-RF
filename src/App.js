@@ -5,6 +5,7 @@ import GeometryContext from './context/GeometryContext'
 import Map from './components/Map'
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import Appbar from './components/Appbar'
 
 function App() {
   const routes = (
@@ -19,6 +20,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <GeometryContext>
+          <Appbar />
           {routes}
         </GeometryContext>
       </Router>

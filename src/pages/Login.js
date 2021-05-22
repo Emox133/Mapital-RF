@@ -1,11 +1,11 @@
 import React from 'react'
-import {Grid, Typography, Paper, Box, TextField, Button} from '@material-ui/core'
+import {Grid, Typography, Box, TextField, Button} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import Logo from './../assets/images/map.svg'
 
 const useStyles = makeStyles({
     gridContainer: {
-        height: '100vh'
+        height: 'calc(100vh - 64px)'
     },
     content: {
         height: '100%'
@@ -49,9 +49,9 @@ const Login = () => {
 
     return (
         <Grid container className={classes.gridContainer}>
-            <Grid item sm={3}/>
-            <Grid item sm={6}>
-                <Paper elevation={1} className={classes.content}>
+            <Grid item xs={0} sm={3}/>
+            <Grid item xs={12} sm={6}>
+                <Box className={classes.content}>
                     <Box className={classes.content__logo_box}>
                         <img src={Logo} alt="logo" className={classes.content__logo} />
                         <Typography variant="h2" color="primary" className={classes.content__title}>
@@ -66,9 +66,9 @@ const Login = () => {
                             <Button className={classes.form__btn} variant="contained" color="primary">Submit</Button>
                         </form>
                     </Box>
-                </Paper>
+                </Box>
             </Grid>
-            <Grid item sm={3} />
+            <Grid item xs={0} sm={3} />
         </Grid>
     )
 }
