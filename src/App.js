@@ -6,11 +6,13 @@ import Map from './components/Map'
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Appbar from './components/Appbar'
+import Home from './pages/Home';
 
 function App() {
   const routes = (
     <Switch>
-      <Route exact path="/" component={Map} />
+      <Route exact path="/" component={Home} />
+      <Route path="/map" component={Map} />
       <Route path="/signup" component={Signup} />
       <Route path="/login" component={Login} />
     </Switch>
