@@ -9,7 +9,7 @@ axios.defaults.baseURL = 'http://localhost:8000/api/v1'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );
