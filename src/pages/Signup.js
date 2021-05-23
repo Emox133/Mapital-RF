@@ -5,7 +5,7 @@ import Logo from './../assets/images/map.svg'
 
 const useStyles = makeStyles({
     gridContainer: {
-        height: 'calc(100vh - 64px)'
+        height: 'calc(100vh - 120px)'
     },
     content: {
         height: '100%'
