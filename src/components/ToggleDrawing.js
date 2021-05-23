@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import DrawingPanel from './DrawingPanel'
 import EditLocationIcon from '@material-ui/icons/EditLocation';
-import {Box} from '@material-ui/core'
+import {Box, useMediaQuery} from '@material-ui/core'
 import {makeStyles} from '@material-ui/styles'
 import AlertDialog from './AlertDialog'
 
@@ -28,6 +28,7 @@ const useStyles = makeStyles({
 const ToggleDrawing = () => {
     const [open, setOpen] = useState(false)
     const classes = useStyles()
+    const isActive = useMediaQuery('(max-width: 600px)')
     
     const toggleHandler = () => {
         const drawingPanel = document.querySelector('.leaflet-draw')
@@ -42,7 +43,7 @@ const ToggleDrawing = () => {
                 <EditLocationIcon />   
             </Box>
             <DrawingPanel isOpen={open} />
-            <AlertDialog isOpen={open} type="success" width="45%">
+            <AlertDialog isOpen={open} type="success" width={isActive ? '70%' : '45%'}>
                 Zahvaljujemo Vam se na unapređenju Sigurnih Staza Živinice!
             </AlertDialog>
         </>

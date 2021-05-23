@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 
@@ -13,13 +13,17 @@ const useStyles = makeStyles({
   },
 })
 
-export default function AlertDialog({children, type, isOpen = true, width, timer = 7}) {
+export default function AlertDialog({children, type, isOpen = true, width = '80%', timer = 7}) {
   const classes = useStyles();
   const [dissapearAfter, setDissapearAfter] = useState(false)
 
-  setTimeout(() => {
-    setDissapearAfter(true)
-  }, timer * 1000)
+  useEffect(() => {
+   const timeout = setTimeout(() => {
+      setDissapearAfter(true)
+    }, timer * 1000)
+
+    return () => clearTimeout(timeout)
+  }, [timer])
 
   const content = isOpen && !dissapearAfter ? (
     <div className={classes.root} style={{width}}>

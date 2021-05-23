@@ -7,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem'
+import {useMediaQuery} from '@material-ui/core'
 import {ValidateIsEmpty} from './../utils/helpers'
 import AlertDialog from './AlertDialog';
 import * as factory from './../utils/factory'
@@ -30,6 +31,7 @@ const categories = [
 export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent}) {
   const [alertOpen, setAlertOpen] = useState(false)
   const [requestSucceded, setRequestSucceded] = useState(false)
+  const isActive = useMediaQuery('(max-width: 600px)')
 
   const handleClose = () => {
     setIsOpen(false);
@@ -148,7 +150,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
           Molimo vas ispunite polja ispod.
        </AlertDialog>}
       {requestSucceded &&
-        <AlertDialog>
+        <AlertDialog  width={isActive ? '70%' : '25%'}>
           Vaš zahtjev je uspiješno proslijeđen.
         </AlertDialog>}
     </div>
