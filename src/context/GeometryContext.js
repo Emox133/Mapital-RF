@@ -1,4 +1,5 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useCallback} from 'react'
+import axios from 'axios'
 import * as factory from './../utils/factory'
 import {ValidateIsEmpty} from './../utils/helpers'
 
@@ -10,6 +11,10 @@ export const useGeometry = () => {
 
 const GeometryContextProvider = ({children}) => {
     const [drawCreatedEvent, setDrawCreatedEvent] = useState()
+    const [markers, setMarkers] = useState([])
+    // const [circles, setCircles] = useState([])
+
+    // console.log(circles)
 
     const createGeometry = (e, fn, fields) => {
         setDrawCreatedEvent(e)
@@ -45,9 +50,27 @@ const GeometryContextProvider = ({children}) => {
         }
     }
 
+    const fetchMarkers = useCallback(() => {
+        axios('/markers').then(res => {
+            setMarkers(res.data.markers)
+        }).catch(err => {
+            console.log(err.response)
+        })
+    }, [])
+
+    // const fetchCircles = useCallback(() => {
+    //     axios('/circles').then(res => {
+    //         setCircles(res.data.circles)
+    //     }).catch(err => {
+    //         console.log(err.response)
+    //     })
+    // }, [])
+
     const value = {
         createGeometry,
-        drawCreatedEvent
+        drawCreatedEvent,
+        fetchMarkers,
+        markers
     }
 
     return (

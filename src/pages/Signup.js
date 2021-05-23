@@ -49,7 +49,7 @@ const Signup = () => {
 
     return (
         <Grid container className={classes.gridContainer}>
-            <Grid item xs={0} sm={3}/>
+            <Grid item xs={false} sm={3}/>
             <Grid item xs={12} sm={6} style={{height: '80%'}}>
                 <Box className={classes.content}>
                     <Box className={classes.content__logo_box}>
@@ -71,7 +71,7 @@ const Signup = () => {
                     </Box>
                 </Box>
             </Grid>
-            <Grid xs={0} item sm={3} />
+            <Grid xs={false} item sm={3} />
         </Grid>
     )
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import { MapContainer, TileLayer} from 'react-leaflet'
 import ToggleDrawing from './ToggleDrawing'
+import Marker from './Marker'
+// import Circle from './Circle'
 
 const Map = () => {
     return (
@@ -10,6 +12,8 @@ const Map = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <ToggleDrawing />
+            <Marker />
+            {/* <Circle /> */}
         </MapContainer>
     )
 }

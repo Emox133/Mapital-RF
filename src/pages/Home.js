@@ -40,7 +40,7 @@ const Home = () => {
     const classes = useStyles()
     return (
         <Box className={classes.screen}>
-            <Box x className={classes.content__box}>
+            <Box className={classes.content__box}>
                 <Box>
                     <Typography className={classes.content__title} variant="h2">
                         Hello from Mapital app
