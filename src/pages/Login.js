@@ -3,7 +3,7 @@ import {Grid, Typography, Box, TextField, Button} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import Logo from './../assets/images/map.svg'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     gridContainer: {
         height: 'calc(100vh - 64px)'
     },
@@ -14,8 +14,12 @@ const useStyles = makeStyles({
         textAlign: 'center'
     },
     content__logo: {
-        height: 170,
-        width: 170
+        height: 150,
+        width: 150,
+        [theme.breakpoints.up('sm')]: {
+            height: 170,
+            width: 170
+        }
     },
     content__title: {
         fontFamily: 'Caveat, cursive',
@@ -42,15 +46,15 @@ const useStyles = makeStyles({
         margin: '0 auto',
         color: '#fff'
     }
-})
+}))
 
 const Login = () => {
     const classes = useStyles()
 
     return (
         <Grid container className={classes.gridContainer}>
-            <Grid item xs={false} sm={3}/>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={false} sm={1} md={3}/>
+            <Grid item xs={12} sm={10} md={6}>
                 <Box className={classes.content}>
                     <Box className={classes.content__logo_box}>
                         <img src={Logo} alt="logo" className={classes.content__logo} />
@@ -68,7 +72,7 @@ const Login = () => {
                     </Box>
                 </Box>
             </Grid>
-            <Grid item xs={false} sm={3} />
+            <Grid item xs={false} sm={1} md={3}/>
         </Grid>
     )
 }
