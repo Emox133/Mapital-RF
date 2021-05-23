@@ -60,8 +60,8 @@ const Login = () => {
                     </Box>
                     <Box className={classes.formBox}>
                         <form className={classes.form} noValidate autoComplete="off">
-                            <TextField className={classes.form__input} id="outlined-basic" label="E-Mail" variant="outlined" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="Lozinka" variant="outlined" />
+                            <TextField className={classes.form__input} id="outlined-basic" label="E-Mail" variant="standard" />
+                            <TextField className={classes.form__input} id="outlined-basic" label="Lozinka" variant="standard" />
 
                             <Button className={classes.form__btn} variant="contained" color="primary">Submit</Button>
                         </form>

@@ -60,11 +60,11 @@ const Signup = () => {
                     </Box>
                     <Box className={classes.formBox}>
                         <form className={classes.form} noValidate autoComplete="off">
-                            <TextField className={classes.form__input} id="outlined-basic" label="Ime" variant="outlined" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="Prezime" variant="outlined" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="E-Mail" variant="outlined" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="Lozinka" variant="outlined" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="Potvrdite Lozinku" variant="outlined" />
+                            <TextField className={classes.form__input} id="outlined-basic" label="Ime" variant="standard" />
+                            <TextField className={classes.form__input} id="outlined-basic" label="Prezime" variant="standard" />
+                            <TextField className={classes.form__input} id="outlined-basic" label="E-Mail" variant="standard" />
+                            <TextField className={classes.form__input} id="outlined-basic" label="Lozinka" variant="standard" />
+                            <TextField className={classes.form__input} id="outlined-basic" label="Potvrdite Lozinku" variant="standard" />
 
                             <Button className={classes.form__btn} variant="contained" color="primary">Submit</Button>
                         </form>
