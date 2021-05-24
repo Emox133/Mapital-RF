@@ -11,7 +11,7 @@ export const iconIP = new L.Icon({
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: new L.Point(35, 35),
+    iconSize: new L.Point(40, 40),
     className: 'leaflet-div-icon'
 });
 
@@ -23,7 +23,7 @@ export const iconSN = new L.Icon({
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: new L.Point(28, 28),
+    iconSize: new L.Point(25, 25),
     className: 'leaflet-div-icon'
 });
 

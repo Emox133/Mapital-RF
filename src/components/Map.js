@@ -10,7 +10,7 @@ const Map = () => {
     const bounds = [northEastBounds, southWestBounds]
 
     return (
-        <MapContainer center={[44.44929, 18.64978]} zoom={15} minZoom={13} maxBounds={bounds}>
+        <MapContainer center={[44.44929, 18.64978]} zoom={16} minZoom={13} maxBounds={bounds}>
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
