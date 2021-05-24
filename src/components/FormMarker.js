@@ -73,7 +73,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     }
 
     // 2) & 3) Create marker in DB / Close dialog
-    factory.createMarker(mapEvent, handleClose, handleRequest, category)
+    factory.createMarker(mapEvent, handleClose, handleRequest, category, description)
   }
 
   return (

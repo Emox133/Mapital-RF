@@ -6,7 +6,8 @@ export const createMarker = (e, fn, requestFn, category, description) => {
     
     axios.post('/markers', {
         latLng,
-        category
+        category,
+        description
     }).then(res => {
         // CLOSE DIALOG
         if(res.status === 201) {

@@ -12,9 +12,6 @@ export const useGeometry = () => {
 const GeometryContextProvider = ({children}) => {
     const [drawCreatedEvent, setDrawCreatedEvent] = useState()
     const [markers, setMarkers] = useState([])
-    // const [circles, setCircles] = useState([])
-
-    // console.log(circles)
 
     const createGeometry = (e, fn, fields) => {
         setDrawCreatedEvent(e)
@@ -57,14 +54,6 @@ const GeometryContextProvider = ({children}) => {
             console.log(err.response)
         })
     }, [])
-
-    // const fetchCircles = useCallback(() => {
-    //     axios('/circles').then(res => {
-    //         setCircles(res.data.circles)
-    //     }).catch(err => {
-    //         console.log(err.response)
-    //     })
-    // }, [])
 
     const value = {
         createGeometry,
