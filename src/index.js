@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import axios from 'axios'
 import GeometryContext from './context/GeometryContext'
 
-axios.defaults.baseURL = 'http://localhost:8000/api/v1'
+// axios.defaults.baseURL = 'http://localhost:8000/api/v1'
+axios.defaults.baseURL = 'https://mapital-backend.herokuapp.com/api/v1'
 
 const MyApp = () => {
   return (
