@@ -44,6 +44,10 @@ code {
   background: transparent;
 }
 
+.leaflet-icon-location {
+  animation: grow .9s ease-in-out infinite;
+}
+
 .hidden {
   /* display: none; BELOW STYLES ARE A WORKAROUND (KIND OF :/) */
   visibility: visible !important;
@@ -57,4 +61,14 @@ code {
 .leaflet-draw {
   opacity: 0;
   visibility: hidden;
+}
+
+@keyframes grow {
+  0% {
+    height: 34px;
+  }
+
+  100% {
+    height: 38px;
+  }
 }
