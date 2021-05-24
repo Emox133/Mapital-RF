@@ -12,6 +12,9 @@ export const createMarker = (e, fn, requestFn, category, description) => {
         if(res.status === 201) {
             fn()
             requestFn()
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000)
         }
     }).catch(err => {
         console.log(err.response)

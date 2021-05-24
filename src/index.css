@@ -39,6 +39,11 @@ code {
   margin-top: 2rem;
 }
 
+.leaflet-div-icon {
+  border: none;
+  background: transparent;
+}
+
 .hidden {
   /* display: none; BELOW STYLES ARE A WORKAROUND (KIND OF :/) */
   visibility: visible !important;
