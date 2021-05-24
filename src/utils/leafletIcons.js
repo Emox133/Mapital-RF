@@ -48,6 +48,6 @@ export const iconLOC = new L.Icon({
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: new L.Point(38, 38),
+    iconSize: new L.Point(30, 30),
     className: 'leaflet-icon-location'
 });
