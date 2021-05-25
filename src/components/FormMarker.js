@@ -11,7 +11,6 @@ import {useMediaQuery} from '@material-ui/core'
 import {ValidateIsEmpty} from './../utils/helpers'
 import AlertDialog from './AlertDialog';
 import * as factory from './../utils/factory'
-// import {palette} from '@material-ui/system'
 
 const categories = [
   {
@@ -51,6 +50,19 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     }));
   };
 
+  const handleImageChange = () => {
+    const file = document.getElementById('photo');
+    file.click();
+  };
+
+  const handleImage = e => {
+    image = e.target.files[0]
+    setFields({
+      ...fields,
+      photo: image
+    })
+  };
+
   const handleRequest = () => {
     setRequestSucceded(true)
     setTimeout(() => {
@@ -58,10 +70,21 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     }, 3000)
   }
 
+  let image;
+  const formData = new FormData()
+
   const handleSubmit = (e) => {
     // 0) Do other stuff
     e.preventDefault()
-    const {name, email, category, description} = fields
+    formData.append('name', fields.name)
+    formData.append('email', fields.email)
+    formData.append('description', fields.description)
+    formData.append('category', fields.category)
+    formData.append('photo', fields.photo); 
+
+    const dataArr = [...formData]
+    const data = Object.fromEntries(dataArr)
+    const {name, email, category, description} = data
     
     // 1) Check if the fields are empty
     if(!ValidateIsEmpty(name, email, category, description)) {
@@ -73,7 +96,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     }
 
     // 2) & 3) Create marker in DB / Close dialog
-    factory.createMarker(mapEvent, handleClose, handleRequest, category, description)
+    factory.createMarker(mapEvent, handleClose, handleRequest, formData)
   }
 
   return (
@@ -84,7 +107,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
           <DialogContentText>
             Da li želite potvrditi odabranu lokaciju?
           </DialogContentText>
-          <form onSubmit={handleSubmit}>
+          <form encType="multipart/form-data" onSubmit={handleSubmit}>
             <TextField
               id="standard-select-category"
               name="category"
@@ -100,6 +123,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
                 </MenuItem>
               ))}
             </TextField>
+
             <TextField
               autoFocus
               margin="dense"
@@ -111,6 +135,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
               onChange={handleChange}
               fullWidth
             />
+
             <TextField
               margin="dense"
               name="email"
@@ -121,6 +146,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
               onChange={handleChange}
               fullWidth
             />
+            
             <TextField
               margin="dense"
               id="description-id"
@@ -134,6 +160,24 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
               rows={5}
               onChange={handleChange}
             />
+
+            <input
+              name="photo"
+              id="photo"
+              hidden="hidden"
+              type="file"
+              onChange={handleImage}
+            />
+
+            <Button
+              color="secondary"
+              variant="contained"
+              style={{color: '#fff'}}
+              onClick={handleImageChange}
+            >
+              Učitaj Fotografiju
+            </Button>
+
             <DialogActions>
               <Button onClick={handleClose} variant="contained" color="secondary">
                 Cancel

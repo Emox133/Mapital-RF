@@ -1,13 +1,15 @@
 import axios from 'axios'
 
-export const createMarker = (e, fn, requestFn, category, description) => {
+export const createMarker = (e, fn, requestFn, data) => {
     const {_latlng} = e.layer
     const latLng = [_latlng.lat, _latlng.lng]
-    
-    axios.post('/markers', {
-        latLng,
-        category,
-        description
+    data.append('latLng', latLng)
+        
+    axios({
+        method: "post",
+        url: "/markers",
+        data,
+        headers: { "Content-Type": "multipart/form-data" }
     }).then(res => {
         // CLOSE DIALOG
         if(res.status === 201) {

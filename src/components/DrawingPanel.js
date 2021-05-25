@@ -10,7 +10,8 @@ const DrawingPanel = () => {
         name: '',
         email: '',
         description: '',
-        category: ''
+        category: '',
+        photo: ''
     })
 
     const {drawCreatedEvent, createGeometry} = useGeometry()

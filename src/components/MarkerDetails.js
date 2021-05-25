@@ -7,7 +7,6 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import Box from '@material-ui/core/Box'
-import Accident from './../assets/images/accident.jpg'
 import {makeStyles} from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
@@ -53,7 +52,8 @@ export default function MarkerDetails({isOpen, onHandleClose, selectedMarker}) {
             Fotografija:
           </DialogContentText>
           <Box className={classes.details__box}>
-            <img src={Accident} alt="road accident" className={classes.details__image} />
+            <img src={selectedMarker && selectedMarker.image} alt="road accident" className={classes.details__image} />
+            <a href={selectedMarker && selectedMarker.image} target="__blank">{selectedMarker && !selectedMarker.image.endsWith('tnsgg0.png') && 'Link fotografije'}</a>
           </Box>
         </DialogContent>
         <DialogActions>
