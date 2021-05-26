@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Marker} from 'react-leaflet'
+import {Marker, useMap} from 'react-leaflet'
 import {useGeometry} from './../context/GeometryContext'
 import {iconIP, iconSN, iconOL} from './../utils/leafletIcons'
 import MarkerDetails from './MarkerDetails'
@@ -7,7 +7,10 @@ import MarkerDetails from './MarkerDetails'
 const MarkerComponent = () => {
     const [open, setOpen] = useState(false)
     const [selectedMarker, setSelectedMarker] = useState()
-    const {markers} = useGeometry()
+    const {markers, markerView, setMarkerView} = useGeometry()
+
+    const map = useMap()
+    map.setView(markerView)
 
     const handleClose = () => {
         setOpen(false)
@@ -36,6 +39,7 @@ const MarkerComponent = () => {
             click: (e) => {
                 setOpen(true)
                 setSelectedMarker(marker)
+                setMarkerView(marker.latLng)
             }
         }} />
     })

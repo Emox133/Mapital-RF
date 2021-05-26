@@ -12,6 +12,7 @@ export const useGeometry = () => {
 const GeometryContextProvider = ({children}) => {
     const [drawCreatedEvent, setDrawCreatedEvent] = useState()
     const [markers, setMarkers] = useState([])
+    const [markerView, setMarkerView] = useState([44.44929, 18.64978])
 
     const createGeometry = (e, fn, fields) => {
         setDrawCreatedEvent(e)
@@ -59,7 +60,9 @@ const GeometryContextProvider = ({children}) => {
         createGeometry,
         drawCreatedEvent,
         fetchMarkers,
-        markers
+        markers,
+        markerView,
+        setMarkerView
     }
 
     return (

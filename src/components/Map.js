@@ -3,7 +3,6 @@ import { MapContainer, TileLayer} from 'react-leaflet'
 import ToggleDrawing from './ToggleDrawing'
 import Marker from './Marker'
 import Navigator from './Navigator'
-// import Circle from './Circle'
 
 const Map = () => {
     const northEastBounds = [44.49589310341624, 18.781642913818363]
@@ -19,7 +18,6 @@ const Map = () => {
             <ToggleDrawing />
             <Navigator />
             <Marker />
-            {/* <Circle /> */}
         </MapContainer>
     )
 }
