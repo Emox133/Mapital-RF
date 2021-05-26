@@ -32,6 +32,7 @@ function App() {
   const {fetchMarkers} = useGeometry()
   const classes = useStyles()
   const history = useHistory()
+  
   history.listen((location, action) => {
       setUrl(location.pathname)
   })
