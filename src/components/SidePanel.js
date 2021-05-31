@@ -66,16 +66,15 @@ const SidePanel = () => {
                 <ListItemText
                     disableTypography
                     primary={<Typography className={classes.sidePanel__listItemPrimary} >{marker.description}</Typography>}
-                    // secondary=""
                 />
             </ListItem>
         )
     })
 
     return (
-        <Box className={`sidepanel--hidden ${classes.sidePanel}`}>
+        <Box className={classes.sidePanel}>
           <Typography variant="h6" align="center" color="primary" className={classes.sidePanel__title}>
-            Sva Dešavanja
+            Posljednji Događaji
           </Typography>
           <div className={classes.demo}>
             <List>

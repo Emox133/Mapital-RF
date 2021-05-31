@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Grid, Typography, Box, TextField, Button} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import Logo from './../assets/images/map.svg'
+import {useUsers} from './../context/UserContext'
+import {useHistory} from 'react-router-dom'
+import {ValidateIsEmpty} from './../utils/helpers'
+import AlertDialog from '../components/AlertDialog'
 
 const useStyles = makeStyles(theme => ({
     gridContainer: {
@@ -49,10 +53,57 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Signup = () => {
+    const [fields, setFields] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    })
+    const [alertOpen, setAlertOpen] = useState(false)
+    const {signup, requestSucceeded, errors} = useUsers()
     const classes = useStyles()
+    const history = useHistory()
+
+    const handleChange = (e) => {
+        setFields({
+            ...fields,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    let requestStatusMessage = errors ? 'Polje/a su u neispravnom formatu.' : 'Molimo vas ispunite neophodna polja.'
+    
+    const handleSubmit = (e) => {
+        // 0) Do other stuff
+        e.preventDefault()
+        const {firstName, lastName, email, password, confirmPassword} = fields
+
+        // 1) Field Validation
+        if(!ValidateIsEmpty(firstName, lastName, email, password, confirmPassword)) {
+            setAlertOpen(true)
+                setTimeout(() => {
+                    setAlertOpen(false)
+                }, 7000)
+            return
+        }
+
+        // 2) Sign up the user
+        signup(fields, history)
+    }
 
     return (
         <Grid container className={classes.gridContainer}>
+            {alertOpen && (
+                <AlertDialog type="error" width="25%">
+                    {requestStatusMessage}
+                </AlertDialog>
+            )}
+            {requestSucceeded && (
+                <AlertDialog type="success" width="25%">
+                    Uspješno ste napravili račun.
+                </AlertDialog>
+            )}
             <Grid item xs={false} sm={1} md={3}/>
             <Grid item xs={12} sm={10} md={6} style={{height: '80%'}}>
                 <Box className={classes.content}>
@@ -63,14 +114,14 @@ const Signup = () => {
                         </Typography>
                     </Box>
                     <Box className={classes.formBox}>
-                        <form className={classes.form} noValidate autoComplete="off">
-                            <TextField className={classes.form__input} id="outlined-basic" label="Ime" variant="standard" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="Prezime" variant="standard" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="E-Mail" variant="standard" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="Lozinka" variant="standard" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="Potvrdite Lozinku" variant="standard" />
+                        <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
+                            <TextField type="text" className={classes.form__input} onChange={handleChange} name="firstName" id="firstName" label="Ime" variant="standard" />
+                            <TextField type="text" className={classes.form__input} onChange={handleChange} name="lastName" id="lastName" label="Prezime" variant="standard" />
+                            <TextField type="email" className={classes.form__input} onChange={handleChange} name="email" id="email" label="E-Mail" variant="standard" />
+                            <TextField type="password" className={classes.form__input} onChange={handleChange} name="password" id="password" label="Lozinka" variant="standard" />
+                            <TextField type="password" className={classes.form__input} onChange={handleChange} name="confirmPassword" id="confirmPassword" label="Potvrdite Lozinku" variant="standard" />
 
-                            <Button className={classes.form__btn} variant="contained" color="primary">Submit</Button>
+                            <Button className={classes.form__btn} variant="contained" color="primary" type="submit">Submit</Button>
                         </form>
                     </Box>
                 </Box>

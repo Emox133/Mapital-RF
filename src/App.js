@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Appbar from './components/Appbar'
 import Home from './pages/Home';
 import {useGeometry} from './context/GeometryContext'
+// import {useUsers} from './context/UserContext'
 import SidePanel from './components/SidePanel';
 import {Container} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
@@ -30,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 function App() {
   const [url, setUrl] = useState('/')
   const {fetchMarkers} = useGeometry()
+  // const {authenticated} = useUsers()
   const classes = useStyles()
   const history = useHistory()
   
