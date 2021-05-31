@@ -30,6 +30,28 @@ code {
     monospace;
 }
 
+.leaflet__icons {
+  height: 33px;
+  width: 33px;
+  background: #fff;
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: .3rem;
+  font-size: 2.2rem;
+  border: 2px solid rgba(0,0,0,.3);
+  border-radius: 3px;
+  line-height: 30px;
+  cursor: pointer;
+}
+
+.leaflet__icons--help {
+  margin-left: 46px;
+}
+
 .leaflet-container {
   height: calc(100vh - 64px);
   width: 100vw;
@@ -57,6 +79,21 @@ code {
 .leaflet-draw {
   opacity: 0;
   visibility: hidden;
+}
+
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
 }
 
 @keyframes grow {

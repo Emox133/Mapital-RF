@@ -2,32 +2,11 @@ import React, {useState} from 'react'
 import DrawingPanel from './DrawingPanel'
 import EditLocationIcon from '@material-ui/icons/EditLocation';
 import {Box, useMediaQuery} from '@material-ui/core'
-import {makeStyles} from '@material-ui/styles'
 import AlertDialog from './AlertDialog'
-
-const useStyles = makeStyles({
-    boxRoot: {
-        height: '33px',
-        width: '33px',
-        background: '#fff',
-        position: 'absolute',
-        zIndex: 1000,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: '10px',
-        marginTop: '.3rem',
-        fontSize: '2.2rem',
-        border: '2px solid rgba(0,0,0,.3)',
-        borderRadius: '3px',
-        lineHeight: '30px',
-        cursor: 'pointer'
-    }
-})
+import MarkerCreationTutorial from './MarkerCreationTutorial'
 
 const ToggleDrawing = () => {
     const [open, setOpen] = useState(false)
-    const classes = useStyles()
     const isActive = useMediaQuery('(max-width: 600px)')
     
     const toggleHandler = () => {
@@ -39,8 +18,11 @@ const ToggleDrawing = () => {
 
     return (
         <>
-            <Box className={classes.boxRoot} onClick={toggleHandler}>
+            <Box className="leaflet__icons" onClick={toggleHandler}>
                 <EditLocationIcon />   
+            </Box>
+            <Box className="leaflet__icons leaflet__icons--help">
+                <MarkerCreationTutorial />
             </Box>
             <DrawingPanel isOpen={open} />
             <AlertDialog isOpen={open} type="success" width={isActive ? '70%' : '45%'}>
