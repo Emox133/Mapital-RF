@@ -38,15 +38,15 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
   const [requestSucceded, setRequestSucceded] = useState(false)
   const isActive = useMediaQuery('(max-width: 600px)')
   const {geometryLoading, setGeometryLoading} = useGeometry()
-  // console.log(geometryLoading)
   
   const handleClose = () => {
     setIsOpen(false);
     setTimeout(() => {
       setFields({
         name: '',
-        email: '',
-        category: 'Rasvjeta'
+        description: '',
+        sender: '',
+        category: 'Rasvjeta',
       })
     }, 1000)
   };
@@ -82,17 +82,17 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     // 0) Do other stuff
     e.preventDefault()
     formData.append('name', fields.name)
-    formData.append('email', fields.email)
+    formData.append('sender', fields.sender)
     formData.append('description', fields.description)
     formData.append('category', fields.category)
     formData.append('photo', fields.photo); 
 
     const dataArr = [...formData]
     const data = Object.fromEntries(dataArr)
-    const {name, email, category, description} = data
+    const {category, description} = data
     
     // 1) Check if the fields are empty
-    if(!ValidateIsEmpty(name, email, category, description)) {
+    if(!ValidateIsEmpty(category, description)) {
       setAlertOpen(true)
       setTimeout(() => {
         setAlertOpen(false)
@@ -136,7 +136,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
               margin="dense"
               id="name-id"
               name="name"
-              label="Ime"
+              label="Ime (opcionalno)"
               type="text"
               value={fields.name}
               onChange={handleChange}
@@ -145,11 +145,11 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
 
             <TextField
               margin="dense"
-              name="email"
-              id="mail"
-              label="E-Mail"
+              name="sender"
+              id="sender_id"
+              label="E-Mail (opcionalno)"
               type="email"
-              value={fields.email}
+              value={fields.sender}
               onChange={handleChange}
               fullWidth
             />

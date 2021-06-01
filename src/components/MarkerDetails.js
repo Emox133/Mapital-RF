@@ -53,7 +53,7 @@ export default function MarkerDetails({isOpen, onHandleClose, selectedMarker}) {
           </DialogContentText>
           <Box className={classes.details__box}>
             <img src={selectedMarker && selectedMarker.image} alt="road accident" className={classes.details__image} />
-            <a href={selectedMarker && selectedMarker.image} target="__blank">{selectedMarker && !selectedMarker.image.endsWith('tnsgg0.png') && 'Link fotografije'}</a>
+            <a href={selectedMarker && selectedMarker.image} target="__blank">{selectedMarker && !selectedMarker.image.endsWith('qxymgr.png') && 'Link fotografije'}</a>
           </Box>
         </DialogContent>
         <DialogActions>

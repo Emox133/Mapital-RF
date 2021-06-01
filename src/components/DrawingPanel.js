@@ -8,7 +8,7 @@ const DrawingPanel = () => {
     const [open, setOpen] = useState(false)
     const [fields, setFields] = useState({
         name: '',
-        email: '',
+        sender: '',
         description: '',
         category: '',
         photo: ''

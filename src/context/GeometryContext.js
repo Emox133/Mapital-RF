@@ -33,13 +33,13 @@ const GeometryContextProvider = ({children}) => {
 
             case 'marker':                 
                 // 0) Do other stuff
-                const {name, email, category, description} = fields
+                const {category, description} = fields
 
                 // 1) Open the dialog
                 fn()
 
                 // 2) Check if the fields are empty
-                if(!ValidateIsEmpty(name, email, category, description)) return
+                if(!ValidateIsEmpty(category, description)) return
             
                 // 3) Send request to the server / create marker
                 factory.createMarker(e)
