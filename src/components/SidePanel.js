@@ -2,9 +2,10 @@ import React from 'react'
 import {Box, Typography, ListItem, ListItemIcon, ListItemText, List} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import {useGeometry} from './../context/GeometryContext'
-import ImageIP from './../assets/images/Infrastrukturni Problem.svg'
-import ImageOL from './../assets/images/Opasne Lokacije.svg'
-import ImageSN from './../assets/images/Saobraćajna Nezgoda.svg'
+import ImageLightBulb from './../assets/images/Rasvjeta.svg'
+import ImageTraffic from './../assets/images/Saobraćaj.svg'
+import ImageNoWatter from './../assets/images/Vodosnabdijevanje.svg'
+import ImageTrash from './../assets/images/Komunalni.svg'
 
 const useStyles = makeStyles(theme => ({
     sidePanel: {
@@ -43,16 +44,20 @@ const SidePanel = () => {
         let image
 
         switch(marker.category) {
-            case 'Infrastrukturni Problem':
-                image = ImageIP
+            case 'Rasvjeta':
+                image = ImageLightBulb
             break;
 
-            case 'Saobraćajna Nezgoda':
-                image = ImageSN
+            case 'Saobraćaj':
+                image = ImageTraffic
             break;
 
-            case 'Opasne Lokacije':                                                                                                                                                                                                                                                                                  
-                image = ImageOL
+            case 'Vodosnabdijevanje':                                                                                                                                                                                                                                                                                  
+                image = ImageTrash
+            break;
+
+            case 'Komunalni':                                                                                                                                                                                                                                                                                  
+                image = ImageNoWatter
             break;
 
             default: return marker.category;

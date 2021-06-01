@@ -7,23 +7,29 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem'
+import {useGeometry} from './../context/GeometryContext'
 import {useMediaQuery} from '@material-ui/core'
 import {ValidateIsEmpty} from './../utils/helpers'
 import AlertDialog from './AlertDialog';
+import Loader from './CircularProgress'
 import * as factory from './../utils/factory'
 
 const categories = [
   {
-    value: 'Infrastrukturni Problem',
-    label: 'Infrastrukturni Problem'
+    value: 'Rasvjeta',
+    label: 'Rasvjeta'
   },
   {
-    value: 'Saobraćajna Nezgoda',
-    label: 'Saobraćajna Nezgoda'
+    value: 'Saobraćaj',
+    label: 'Saobraćaj'
   },
   {
-    value: 'Opasne Lokacije',
-    label: 'Opasne Lokacije'
+    value: 'Vodosnabdijevanje',
+    label: 'Vodosnabdijevanje'
+  },
+  {
+    value: 'Komunalni',
+    label: 'Komunalni'
   }
 ]
 
@@ -31,14 +37,16 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
   const [alertOpen, setAlertOpen] = useState(false)
   const [requestSucceded, setRequestSucceded] = useState(false)
   const isActive = useMediaQuery('(max-width: 600px)')
-
+  const {geometryLoading, setGeometryLoading} = useGeometry()
+  // console.log(geometryLoading)
+  
   const handleClose = () => {
     setIsOpen(false);
     setTimeout(() => {
       setFields({
         name: '',
         email: '',
-        category: 'Infrastrukturni Problem'
+        category: 'Rasvjeta'
       })
     }, 1000)
   };
@@ -65,9 +73,6 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
 
   const handleRequest = () => {
     setRequestSucceded(true)
-    setTimeout(() => {
-      setRequestSucceded(false)
-    }, 3000)
   }
 
   let image;
@@ -96,12 +101,14 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     }
 
     // 2) & 3) Create marker in DB / Close dialog
-    factory.createMarker(mapEvent, handleClose, handleRequest, formData)
+    factory.createMarker(mapEvent, setGeometryLoading, handleClose, handleRequest, formData)
   }
 
   return (
     <div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        {!geometryLoading ? 
+      <>
         <DialogTitle id="form-dialog-title">Potvrda</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -186,8 +193,10 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
                 Submit
               </Button>
             </DialogActions>
-          </form>
+          </form> 
         </DialogContent>
+        </>
+        : <Loader />}
       </Dialog>
       {alertOpen &&
         <AlertDialog type="error" width="50%">

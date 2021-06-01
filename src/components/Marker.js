@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Marker, useMap} from 'react-leaflet'
 import {useGeometry} from './../context/GeometryContext'
-import {iconIP, iconSN, iconOL} from './../utils/leafletIcons'
+import {iconLightBulb, iconTraffic, iconNoWatter, iconTrash} from './../utils/leafletIcons'
 import MarkerDetails from './MarkerDetails'
 
 const MarkerComponent = () => {
@@ -20,16 +20,20 @@ const MarkerComponent = () => {
         let icon
 
         switch(marker.category) {
-            case 'Infrastrukturni Problem':
-                icon = iconIP
+            case 'Rasvjeta':
+                icon = iconLightBulb
             break;
 
-            case 'Saobraćajna Nezgoda':
-                icon = iconSN
+            case 'Saobraćaj':
+                icon = iconTraffic
             break;
 
-            case 'Opasne Lokacije':                                                                                                                                                                                                                                                                                  
-                icon = iconOL
+            case 'Vodosnabdijevanje':                                                                                                                                                                                                                                                                                  
+                icon = iconNoWatter
+            break;
+
+            case 'Komunalni':                                                                                                                                                                                                                                                                                  
+                icon = iconTrash
             break;
 
             default: return marker.category;
