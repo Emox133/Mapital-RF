@@ -84,7 +84,7 @@ const Signup = () => {
             setAlertOpen(true)
                 setTimeout(() => {
                     setAlertOpen(false)
-                }, 7000)
+                }, 3000)
             return
         }
 

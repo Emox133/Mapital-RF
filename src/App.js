@@ -8,10 +8,14 @@ import Login from './pages/Login';
 import Appbar from './components/Appbar'
 import Home from './pages/Home';
 import {useGeometry} from './context/GeometryContext'
+import {useUsers} from './context/UserContext'
 // import {useUsers} from './context/UserContext'
 import SidePanel from './components/SidePanel';
 import {Container} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
+import jwtDecode from 'jwt-decode'
+import Loader from './components/CircularProgress'
+import GuardedRoute from './utils/GuardedRoute'
 
 const useStyles = makeStyles(theme => ({
   root__flex: {
@@ -31,13 +35,29 @@ const useStyles = makeStyles(theme => ({
 function App() {
   const [url, setUrl] = useState('/')
   const {fetchMarkers, fetchCircles} = useGeometry()
-  // const {authenticated} = useUsers()
+  const {authenticated, setAuthenticated, logout, isUserLoading} = useUsers()
   const classes = useStyles()
   const history = useHistory()
   
   history.listen((location, action) => {
       setUrl(location.pathname)
   })
+
+  const token = localStorage.token
+
+  useEffect(() => {
+    if(token) {
+      // 1) If there is a token, decode it
+      const decodedToken = jwtDecode(token)
+    
+      // 2) Check if the token is expired
+      if(new Date(decodedToken.exp * 1000) < new Date()) {
+        logout(history)
+      } 
+
+      setAuthenticated(true)
+    }
+  }, [token, history, logout, setAuthenticated])
 
   useEffect(() => {
     fetchMarkers()
@@ -46,21 +66,29 @@ function App() {
 
   const routes = (
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route path="/map" component={Map} />
-      <Route path="/signup" component={Signup} />
-      <Route path="/login" component={Login} />
+        <GuardedRoute exact path="/" component={Home} auth={!authenticated} />
+        <Route path="/map" component={Map} />
+        <GuardedRoute path="/signup" component={Signup} auth={!authenticated} />
+        <GuardedRoute path="/login" component={Login} auth={!authenticated} />
     </Switch>
   )
 
+  const isAppLoading = !isUserLoading ? (
+      <ThemeProvider theme={theme}>
+        <Appbar />
+        <Container className={classes.root__flex}>
+          {url === '/map' && <SidePanel />}
+          {routes}
+        </Container>
+      </ThemeProvider>
+  ) : (
+    <Loader />
+  )
+
   return (
-    <ThemeProvider theme={theme}>
-      <Appbar />
-      <Container className={classes.root__flex}>
-        {url === '/map' && <SidePanel />}
-        {routes}
-      </Container>
-    </ThemeProvider>
+    <div className="app">
+      {isAppLoading}
+    </div>
   )
 }
 

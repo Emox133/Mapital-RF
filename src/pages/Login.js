@@ -1,7 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
 import {Grid, Typography, Box, TextField, Button} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
+import {useUsers} from './../context/UserContext'
 import Logo from './../assets/images/map.svg'
+import {ValidateIsEmpty} from './../utils/helpers'
+import AlertDialog from './../components/AlertDialog'
 
 const useStyles = makeStyles(theme => ({
     gridContainer: {
@@ -49,10 +53,54 @@ const useStyles = makeStyles(theme => ({
 }))
 
 const Login = () => {
+    const [fields, setFields] = useState({
+        email: '',
+        password: ''
+    })
+    const [alertOpen, setAlertOpen] = useState(false)
+    const history = useHistory()
     const classes = useStyles()
+    const {login, requestSucceeded} = useUsers()
+    
+    const handleChange = (e) => {
+        setFields({
+            ...fields,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const handleSubmit = (e) => {
+        // 0) Do other stuff
+        e.preventDefault()
+        const {email, password} = fields
+
+        // 1) Check for empty fields
+        if(!ValidateIsEmpty(email, password)) {
+            setAlertOpen(true)
+            setTimeout(() => {
+                setAlertOpen(false)
+            }, 3000)
+            return
+        }
+
+        // 2) Log in the user
+        login(fields, history)
+    }
 
     return (
         <Grid container className={classes.gridContainer}>
+            {alertOpen && ( 
+                    <AlertDialog type="error" width="25%">
+                        Molimo vas unesite e-mail i lozinku.
+                    </AlertDialog>
+                )
+            }
+            {requestSucceeded && ( 
+                    <AlertDialog type="success" width="25%">
+                        Uspješno ste se ulogovali.
+                    </AlertDialog>
+                )
+            }
             <Grid item xs={false} sm={1} md={3}/>
             <Grid item xs={12} sm={10} md={6}>
                 <Box className={classes.content}>
@@ -63,11 +111,11 @@ const Login = () => {
                         </Typography>
                     </Box>
                     <Box className={classes.formBox}>
-                        <form className={classes.form} noValidate autoComplete="off">
-                            <TextField className={classes.form__input} id="outlined-basic" label="E-Mail" variant="standard" />
-                            <TextField className={classes.form__input} id="outlined-basic" label="Lozinka" variant="standard" />
+                        <form className={classes.form} noValidate autoComplete="off" onSubmit={handleSubmit}>
+                            <TextField onChange={handleChange} type="email" name="email" className={classes.form__input} id="email-login-id" label="E-Mail" variant="standard" />
+                            <TextField onChange={handleChange} type="password" name="password" className={classes.form__input} id="password-login-id" label="Lozinka" variant="standard" />
 
-                            <Button className={classes.form__btn} variant="contained" color="primary">Submit</Button>
+                            <Button type="submit" className={classes.form__btn} variant="contained" color="primary">Submit</Button>
                         </form>
                     </Box>
                 </Box>

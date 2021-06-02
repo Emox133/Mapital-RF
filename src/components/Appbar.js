@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
+import { useUsers } from '../context/UserContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,15 +20,25 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar() {
   const classes = useStyles();
+  const history = useHistory()
+  const {authenticated, logout} = useUsers()
+
+  let authAppbar = !authenticated ? (
+    <Toolbar>
+      <Button color="inherit" component={Link} to="/signup">Signup</Button>
+      <Button color="inherit" component={Link} to="/">Home</Button>
+      <Button color="inherit" component={Link} to="/login">Login</Button>
+    </Toolbar>
+  ) : (
+    <Toolbar>
+      <Button color="inherit" onClick={logout.bind(null, history)}>Logout</Button>
+    </Toolbar>
+  )
 
   return (
     <div className={classes.root}>
       <AppBar style={{color: '#fff', zIndex: '900'}} position="static">
-        <Toolbar>
-          <Button color="inherit" component={Link} to="/signup">Signup</Button>
-          <Button color="inherit" component={Link} to="/">Home</Button>
-          <Button color="inherit" component={Link} to="/login">Login</Button>
-        </Toolbar>
+        {authAppbar}
       </AppBar>
     </div>
   );
