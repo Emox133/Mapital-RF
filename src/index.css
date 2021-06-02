@@ -10,6 +10,11 @@ html {
   font-size: 75%; /*Defines what 1rem is*/
 }
 
+::selection {
+  background: #4caf50;
+  color: #fff;
+}
+
 @media screen and (min-width: 960px) {
   html {
     font-size: 87.5%;

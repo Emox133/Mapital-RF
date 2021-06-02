@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 
 function App() {
   const [url, setUrl] = useState('/')
-  const {fetchMarkers} = useGeometry()
+  const {fetchMarkers, fetchCircles} = useGeometry()
   // const {authenticated} = useUsers()
   const classes = useStyles()
   const history = useHistory()
@@ -41,7 +41,8 @@ function App() {
 
   useEffect(() => {
     fetchMarkers()
-  }, [fetchMarkers])
+    fetchCircles()
+  }, [fetchMarkers, fetchCircles])
 
   const routes = (
     <Switch>

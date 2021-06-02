@@ -12,6 +12,7 @@ export const useGeometry = () => {
 const GeometryContextProvider = ({children}) => {
     const [drawCreatedEvent, setDrawCreatedEvent] = useState()
     const [markers, setMarkers] = useState([])
+    const [circles, setCircles] = useState([])
     const [markerView, setMarkerView] = useState([44.44929, 18.64978])
     const [geometryLoading, setGeometryLoading] = useState(false)
 
@@ -19,7 +20,13 @@ const GeometryContextProvider = ({children}) => {
         setDrawCreatedEvent(e)
 
         switch(e.layerType) {
-            case 'circle': factory.createCircle(e)
+            case 'circle': {
+                const {description} = fields
+
+                fn()
+                if(!ValidateIsEmpty(description)) return
+                factory.createCircle(e, description)
+            }
             break;
     
             case 'polyline': factory.createPolyline(e)
@@ -57,11 +64,21 @@ const GeometryContextProvider = ({children}) => {
         })
     }, [])
 
+    const fetchCircles = useCallback(() => {
+        axios('/circles').then(res => {
+            setCircles(res.data.circles)
+        }).catch(err => {
+            console.log(err)
+        })
+    }, [])
+
     const value = {
         createGeometry,
         drawCreatedEvent,
         fetchMarkers,
         markers,
+        fetchCircles,
+        circles,
         markerView,
         setMarkerView,
         setGeometryLoading,

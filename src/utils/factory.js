@@ -25,16 +25,22 @@ export const createMarker = (e, setLoading, closeDialog, requestDidSucceed, data
     })
 }
 
-export const createCircle = (e) => {
+export const createCircle = (e, description, setLoading, requestDidSucceed, closeDialog) => {
     const { lat, lng } = e.layer._latlng
     const radius = e.layer._mRadius
 
     axios.post('/circles', {
         coordinates: [lat, lng],
-        radius
+        radius,
+        description
     }).then(res => {
         if (res.status === 201) {
-            alert('Uspješno ste kreirali krug.')
+            closeDialog()
+            setLoading(false)
+            requestDidSucceed()
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000)
         }
     }).catch(err => {
         console.log(err.response)

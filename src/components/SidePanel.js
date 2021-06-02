@@ -79,7 +79,7 @@ const SidePanel = () => {
     return (
         <Box className={classes.sidePanel}>
           <Typography variant="h6" align="center" color="primary" className={classes.sidePanel__title}>
-            Posljednji Događaji
+            Problemi na čekanju
           </Typography>
           <div className={classes.demo}>
             <List>

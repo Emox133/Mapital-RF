@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom'
 import { MapContainer, TileLayer} from 'react-leaflet'
 import ToggleDrawing from './ToggleDrawing'
 import Marker from './Marker'
+import Circle from './Circle'
 import Navigator from './Navigator'
 
 const Map = () => {
@@ -24,6 +25,7 @@ const Map = () => {
             <ToggleDrawing />
             <Navigator />
             <Marker />
+            <Circle />
         </MapContainer>
     )
 }
