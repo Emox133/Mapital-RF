@@ -1,12 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { FeatureGroup } from 'react-leaflet';
 import { EditControl } from "react-leaflet-draw"
 import FormMarker from './FormMarker'
 import FormCircle from './FormCircle'
 import {useGeometry} from './../context/GeometryContext'
+import { useUsers } from '../context/UserContext';
 
 const DrawingPanel = () => {
     const [open, setOpen] = useState(false)
+    const {authenticated, user} = useUsers()
     const [fields, setFields] = useState({
         name: '',
         sender: '',
@@ -21,6 +23,13 @@ const DrawingPanel = () => {
         setOpen(true)
     }
 
+    useEffect(() => {
+        if((user && user[0].role === 'user') || (user && user.length === 0) || !authenticated) {
+            const circle = document.querySelector('.leaflet-draw-draw-circle')
+            circle.style.display = 'none'
+        }
+    }, [user, authenticated])
+
     const content = (
         <>
             <FeatureGroup>
@@ -29,7 +38,7 @@ const DrawingPanel = () => {
                     onCreated={(e) => createGeometry(e, handleOpen, fields)}
                     draw={{
                         circlemarker: false,
-                        // circle: false,
+                        circle: true,
                         polygon: false,
                         polyline: false,
                         rectangle: false

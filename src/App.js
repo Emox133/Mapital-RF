@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import axios from 'axios'
 import { ThemeProvider } from '@material-ui/core/styles';
 import {Switch, Route, useHistory} from 'react-router-dom'
 import {theme} from './utils/theme'
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
 function App() {
   const [url, setUrl] = useState('/')
   const {fetchMarkers, fetchCircles} = useGeometry()
-  const {authenticated, setAuthenticated, logout, isUserLoading} = useUsers()
+  const {authenticated, setAuthenticated, getUser, logout, isUserLoading} = useUsers()
   const classes = useStyles()
   const history = useHistory()
   
@@ -56,8 +57,10 @@ function App() {
       } 
 
       setAuthenticated(true)
+      axios.defaults.headers.common['Authorization'] = token
+      getUser()
     }
-  }, [token, history, logout, setAuthenticated])
+  }, [token, logout, history, setAuthenticated, getUser])
 
   useEffect(() => {
     fetchMarkers()

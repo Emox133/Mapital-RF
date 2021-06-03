@@ -64,18 +64,14 @@ const Home = () => {
             <Grid item xs={12} md={6} className={classes.content__box}>
                 <Box>
                     <Typography className={classes.content__title} variant="h2">
-                        Hello from Mapital app
+                        Mapital
                     </Typography>
                     <Typography style={{color: '#666'}} variant="h6" className={classes.content__subtitle}>
-                        lorem ipsum dolor sir amet.
-                        lorem ipsum dolor sir amet.
-                        lorem ipsum dolor sir amet.
-                        lorem ipsum dolor sir amet.
-                        lorem ipsum dolor sir amet.
-                        lorem ipsum dolor sir amet.
-                        lorem ipsum dolor sir amet.
+                        Aplikacija Mapital je napravljena u svrhu efikasnijeg riješavanja problema
+                        na području Opštine Živinice, koristeći moderan i efikasan sistem praćenja
+                        podataka u "real-time".
                     </Typography>
-                    <Button component={Link} to="/map" style={{marginTop: '1rem', color: '#fff'}} variant="contained" color="primary">Get Started</Button>
+                    <Button component={Link} to="/map" style={{marginTop: '1rem', color: '#fff'}} variant="contained" color="primary">Započni</Button>
                 </Box>
             </Grid>
             <Grid item xs={12} md={6} className={classes.landing__box}>

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useCallback, useContext, useState} from 'react'
 import {setAuthorizationHeader} from './../utils/helpers'
 import axios from 'axios'
 
@@ -9,6 +9,7 @@ export const useUsers = () => {
 }
 
 const UserContextProvider = ({children}) => {
+    const [user, setUser] = useState()
     const [authenticated, setAuthenticated] = useState(false)
     const [isUserLoading, setIsUserLoading] = useState(false)
     const [requestSucceeded, setRequestSucceeded] = useState(false)
@@ -56,13 +57,27 @@ const UserContextProvider = ({children}) => {
         })
     }
 
-    const logout = (history) => {
+    const logout = useCallback((history) => {
         localStorage.removeItem('token')
+        localStorage.removeItem('role')
         setAuthenticated(false)
         delete axios.defaults.headers.common['Authorization']
         history.push('/login')
         history.go(0)
-    }
+    }, [])
+
+    const getUser = useCallback(() => {
+        axios('/users/me')
+        .then(res => {
+            if(res.status === 200) {
+                setUser(res.data.user)
+            }
+        })
+        .catch(err => {
+            // setErrors(err.response.error)
+            console.log(err.response)
+        })
+    }, [])
 
     const value = {
         requestSucceeded,
@@ -72,7 +87,9 @@ const UserContextProvider = ({children}) => {
         errors,
         signup,
         login,
-        logout
+        logout,
+        getUser,
+        user
     }
 
     return (
