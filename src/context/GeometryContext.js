@@ -10,6 +10,7 @@ export const useGeometry = () => {
 }
 
 const GeometryContextProvider = ({children}) => {
+    const [satelliteView, setSatelliteView] = useState(false)
     const [drawCreatedEvent, setDrawCreatedEvent] = useState()
     const [markers, setMarkers] = useState([])
     const [circles, setCircles] = useState([])
@@ -73,6 +74,8 @@ const GeometryContextProvider = ({children}) => {
     }, [])
 
     const value = {
+        satelliteView,
+        setSatelliteView,
         createGeometry,
         drawCreatedEvent,
         fetchMarkers,

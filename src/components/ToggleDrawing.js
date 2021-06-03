@@ -4,6 +4,7 @@ import EditLocationIcon from '@material-ui/icons/EditLocation';
 import {Box, useMediaQuery} from '@material-ui/core'
 import AlertDialog from './AlertDialog'
 import MarkerCreationTutorial from './MarkerCreationTutorial'
+import SatelliteView from './SatelliteView';
 
 const ToggleDrawing = () => {
     const [open, setOpen] = useState(false)
@@ -23,6 +24,9 @@ const ToggleDrawing = () => {
             </Box>
             <Box className="leaflet__icons leaflet__icons--help">
                 <MarkerCreationTutorial />
+            </Box>
+            <Box className="leaflet__icons leaflet__icons--switch-map">
+                <SatelliteView />
             </Box>
             <DrawingPanel isOpen={open} />
             <AlertDialog isOpen={open} type="success" width={isActive ? '70%' : '45%'}>

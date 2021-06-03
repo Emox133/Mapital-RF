@@ -62,6 +62,10 @@ code {
   margin-left: 46px;
 }
 
+.leaflet__icons--switch-map {
+  margin-left: 82px;
+}
+
 .leaflet-container {
   height: calc(100vh - 64px);
   width: 100vw;
