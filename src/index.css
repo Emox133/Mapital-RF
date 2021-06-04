@@ -8,12 +8,12 @@
 
 html {
   font-size: 75%; /*Defines what 1rem is*/
-  height: 100%;
 }
 
 #root, .app {
   min-height: 100vh;
   width: 100vw;
+  position: fixed;
 }
 
 ::selection {
@@ -28,7 +28,6 @@ html {
 }
 
 body {
-  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
