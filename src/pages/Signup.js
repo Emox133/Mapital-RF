@@ -105,7 +105,7 @@ const Signup = () => {
                 </AlertDialog>
             )}
             <Grid item xs={false} sm={1} md={3}/>
-            <Grid item xs={12} sm={10} md={6} style={{height: '80%'}}>
+            <Grid item xs={12} sm={10} md={6} style={{height: '80%', marginBottom: '2rem'}}>
                 <Box className={classes.content}>
                     <Box className={classes.content__logo_box}>
                         <img src={Logo} alt="logo" className={classes.content__logo} />
