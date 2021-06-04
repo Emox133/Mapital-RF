@@ -8,11 +8,11 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import MenuItem from '@material-ui/core/MenuItem'
 import {useGeometry} from './../context/GeometryContext'
-import {useMediaQuery} from '@material-ui/core'
 import {ValidateIsEmpty} from './../utils/helpers'
 import AlertDialog from './AlertDialog';
 import Loader from './CircularProgress'
 import * as factory from './../utils/factory'
+import { makeStyles } from '@material-ui/core/styles';
 
 const categories = [
   {
@@ -33,12 +33,19 @@ const categories = [
   }
 ]
 
+const useStyles = makeStyles(theme => ({
+  paper: {
+    height: '100%',
+    width: '100%'
+  }
+}))
+
 export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent}) {
   const [alertOpen, setAlertOpen] = useState(false)
   const [requestSucceded, setRequestSucceded] = useState(false)
-  const isActive = useMediaQuery('(max-width: 600px)')
   const {geometryLoading, setGeometryLoading} = useGeometry()
-  
+  const classes = useStyles()
+
   const handleClose = () => {
     setIsOpen(false);
     setTimeout(() => {
@@ -106,7 +113,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" PaperProps={{classes: {root: classes.paper}}}>
         {!geometryLoading ? 
       <>
         <DialogTitle id="form-dialog-title">Potvrda</DialogTitle>
