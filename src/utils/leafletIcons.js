@@ -13,7 +13,7 @@ export const iconLightBulb = new L.Icon({
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: new L.Point(40, 40),
+    iconSize: new L.Point(30, 30),
     className: 'leaflet-div-icon'
 });
 
@@ -25,7 +25,7 @@ export const iconTraffic = new L.Icon({
     shadowUrl: null,
     shadowSize: null,
     shadowAnchor: null,
-    iconSize: new L.Point(25, 25),
+    iconSize: new L.Point(22, 22),
     className: 'leaflet-div-icon'
 });
 
