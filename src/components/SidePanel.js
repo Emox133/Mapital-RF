@@ -6,6 +6,8 @@ import ImageLightBulb from './../assets/images/Rasvjeta.svg'
 import ImageTraffic from './../assets/images/Saobraćaj.svg'
 import ImageNoWatter from './../assets/images/Vodosnabdijevanje.svg'
 import ImageTrash from './../assets/images/Komunalni.svg'
+import ImageCircleIssue from './../assets/images/problem-krug.svg'
+import { useUsers } from '../context/UserContext'
 
 const useStyles = makeStyles(theme => ({
     sidePanel: {
@@ -38,9 +40,10 @@ const useStyles = makeStyles(theme => ({
 
 const SidePanel = () => {
     const classes = useStyles()
-    const {markers, setMarkerView} = useGeometry()
+    const {markers, circles, setMapView} = useGeometry()
+    const {user} = useUsers()
 
-    const content = markers.map(marker => {
+    const renderMarkers = markers.map(marker => {
         let image
 
         switch(marker.category) {
@@ -64,13 +67,27 @@ const SidePanel = () => {
         }
 
         return (
-            <ListItem key={marker._id} style={{cursor: 'pointer'}} onClick={() => setMarkerView(marker.latLng)}>
+            <ListItem key={marker._id} style={{cursor: 'pointer'}} onClick={() => setMapView(marker.latLng)}>
                 <ListItemIcon>
                     <img src={image} alt={`${marker.category}`} className={classes.sidePanel__image} />
                 </ListItemIcon>
                 <ListItemText
                     disableTypography
                     primary={<Typography className={classes.sidePanel__listItemPrimary} >{marker.description}</Typography>}
+                />
+            </ListItem>
+        )
+    })
+
+    const renderCircles = circles.map(circle => {
+        return (
+            <ListItem key={circle._id} style={{cursor: 'pointer'}} onClick={() => setMapView(circle.coordinates)}>
+                <ListItemIcon>
+                    <img src={ImageCircleIssue} alt="circle" className={classes.sidePanel__image} />
+                </ListItemIcon>
+                <ListItemText
+                    disableTypography
+                    primary={<Typography className={classes.sidePanel__listItemPrimary} >{circle.description}</Typography>}
                 />
             </ListItem>
         )
@@ -83,7 +100,8 @@ const SidePanel = () => {
           </Typography>
           <div className={classes.demo}>
             <List>
-                {content}
+                {renderMarkers}
+                {user && user[0].role === 'admin' && renderCircles}
             </List>
           </div>
         </Box>

@@ -1,5 +1,5 @@
 import React, {useState, Fragment} from 'react'
-import {Circle} from 'react-leaflet'
+import {Circle, useMap} from 'react-leaflet'
 import CircleDetails from './CircleDetails'
 import {useGeometry} from './../context/GeometryContext'
 import { useUsers } from '../context/UserContext'
@@ -7,8 +7,11 @@ import { useUsers } from '../context/UserContext'
 const CircleComponent = () => {
     const [open, setOpen] = useState(false)
     const [selectedCircle, setSelectedCircle] = useState()
-    const {circles} = useGeometry()
+    const {circles, mapView, setMapView} = useGeometry()
     const {user} = useUsers()
+
+    const map  = useMap()
+    map.setView(mapView)
 
     const handleClose = () => {
         setOpen(false)
@@ -21,6 +24,7 @@ const CircleComponent = () => {
                     click: (e) => {
                         setOpen(true)
                         setSelectedCircle(circle)
+                        setMapView(circle.coordinates)
                     }
                 }}  />
                 <CircleDetails isOpen={open} onHandleClose={handleClose} selectedCircle={selectedCircle} />

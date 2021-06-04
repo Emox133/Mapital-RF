@@ -7,10 +7,10 @@ import MarkerDetails from './MarkerDetails'
 const MarkerComponent = () => {
     const [open, setOpen] = useState(false)
     const [selectedMarker, setSelectedMarker] = useState()
-    const {markers, markerView, setMarkerView} = useGeometry()
+    const {markers, mapView, setMapView} = useGeometry()
 
     const map = useMap()
-    map.setView(markerView)
+    map.setView(mapView)
 
     const handleClose = () => {
         setOpen(false)
@@ -43,7 +43,7 @@ const MarkerComponent = () => {
             click: (e) => {
                 setOpen(true)
                 setSelectedMarker(marker)
-                setMarkerView(marker.latLng)
+                setMapView(marker.latLng)
             }
         }} />
     })

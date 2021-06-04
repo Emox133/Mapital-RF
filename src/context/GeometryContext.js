@@ -14,7 +14,7 @@ const GeometryContextProvider = ({children}) => {
     const [drawCreatedEvent, setDrawCreatedEvent] = useState()
     const [markers, setMarkers] = useState([])
     const [circles, setCircles] = useState([])
-    const [markerView, setMarkerView] = useState([44.44929, 18.64978])
+    const [mapView, setMapView] = useState([44.44929, 18.64978])
     const [geometryLoading, setGeometryLoading] = useState(false)
 
     const createGeometry = (e, fn, fields) => {
@@ -82,8 +82,8 @@ const GeometryContextProvider = ({children}) => {
         markers,
         fetchCircles,
         circles,
-        markerView,
-        setMarkerView,
+        mapView,
+        setMapView,
         setGeometryLoading,
         geometryLoading
     }
