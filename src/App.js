@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     padding: 0,
     overflow: 'hidden',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       height: 'calc(100vh - 64px)',
       flexDirection: 'row'
     }

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         order: '1',
         background: '#f5f5f5',
         overflowY: 'scroll',
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             height: '100vh',
             width: '25vw',
             order: '0',
@@ -97,7 +97,7 @@ const SidePanel = () => {
 
     return (
         <Box className={classes.sidePanel}>
-          <Typography variant="h6" align="center" color="primary" className={classes.sidePanel__title}>
+          <Typography variant="h6" align="center" color="secondary" className={classes.sidePanel__title}>
             Problemi na čekanju
           </Typography>
           <div className={classes.demo}>
