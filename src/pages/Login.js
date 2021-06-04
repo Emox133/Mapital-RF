@@ -9,7 +9,7 @@ import AlertDialog from './../components/AlertDialog'
 
 const useStyles = makeStyles(theme => ({
     gridContainer: {
-        height: 'calc(100vh - 64px)'
+        minHeight: 'calc(100vh - 64px)'
     },
     content: {
         height: '100%'
