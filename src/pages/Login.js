@@ -90,13 +90,13 @@ const Login = () => {
     return (
         <Grid container className={classes.gridContainer}>
             {alertOpen && ( 
-                    <AlertDialog type="error" width="25%">
+                    <AlertDialog type="error">
                         Molimo vas unesite e-mail i lozinku.
                     </AlertDialog>
                 )
             }
             {requestSucceeded && ( 
-                    <AlertDialog type="success" width="25%">
+                    <AlertDialog type="success">
                         Uspješno ste se ulogovali.
                     </AlertDialog>
                 )

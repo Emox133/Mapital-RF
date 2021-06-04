@@ -94,12 +94,12 @@ const Signup = () => {
     return (
         <Grid container className={classes.gridContainer}>
             {alertOpen && (
-                <AlertDialog type="error" width="25%">
+                <AlertDialog type="error">
                     {requestStatusMessage}
                 </AlertDialog>
             )}
             {requestSucceeded && (
-                <AlertDialog type="success" width="25%">
+                <AlertDialog type="success">
                     Uspješno ste napravili račun.
                 </AlertDialog>
             )}

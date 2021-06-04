@@ -199,11 +199,11 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
         : <Loader />}
       </Dialog>
       {alertOpen &&
-        <AlertDialog type="error" width="50%">
+        <AlertDialog type="error">
           Molimo vas ispunite polja ispod.
        </AlertDialog>}
       {requestSucceded &&
-        <AlertDialog  width={isActive ? '70%' : '25%'}>
+        <AlertDialog>
           Vaš zahtjev je uspiješno proslijeđen.
         </AlertDialog>}
     </div>

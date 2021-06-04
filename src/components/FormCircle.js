@@ -7,7 +7,6 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {useGeometry} from './../context/GeometryContext'
-import {useMediaQuery} from '@material-ui/core'
 import {ValidateIsEmpty} from './../utils/helpers'
 import AlertDialog from './AlertDialog';
 import Loader from './CircularProgress'
@@ -16,7 +15,6 @@ import * as factory from './../utils/factory'
 export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent}) {
   const [alertOpen, setAlertOpen] = useState(false)
   const [requestSucceded, setRequestSucceded] = useState(false)
-  const isActive = useMediaQuery('(max-width: 600px)')
   const {geometryLoading, setGeometryLoading} = useGeometry()
   
   const handleClose = () => {
@@ -99,11 +97,11 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
         : <Loader />}
       </Dialog>
       {alertOpen &&
-        <AlertDialog type="error" width="50%">
+        <AlertDialog type="error">
           Molimo vas ispunite polja ispod.
        </AlertDialog>}
       {requestSucceded &&
-        <AlertDialog  width={isActive ? '70%' : '25%'}>
+        <AlertDialog>
           Vaš zahtjev je uspiješno proslijeđen.
         </AlertDialog>}
     </div>
