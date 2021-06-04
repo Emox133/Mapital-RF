@@ -8,6 +8,7 @@ import ImageNoWatter from './../assets/images/Vodosnabdijevanje.svg'
 import ImageTrash from './../assets/images/Komunalni.svg'
 import ImageCircleIssue from './../assets/images/problem-krug.svg'
 import { useUsers } from '../context/UserContext'
+import CircularProgress from './CircularProgress'
 
 const useStyles = makeStyles(theme => ({
     sidePanel: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles(theme => ({
         order: '1',
         background: '#f5f5f5',
         overflowY: 'scroll',
+        position: 'relative',
         [theme.breakpoints.up('md')]: {
             height: '100vh',
             width: '25vw',
@@ -42,7 +44,7 @@ const useStyles = makeStyles(theme => ({
 
 const SidePanel = () => {
     const classes = useStyles()
-    const {markers, circles, setMapView} = useGeometry()
+    const {geometryLoading, markers, circles, setMapView} = useGeometry()
     const {user} = useUsers()
 
     const renderMarkers = markers.map(marker => {
@@ -95,8 +97,8 @@ const SidePanel = () => {
         )
     })
 
-    return (
-        <Box className={classes.sidePanel}>
+    const content = !geometryLoading ? (
+        <>
           <Typography variant="h6" align="center" color="secondary" className={classes.sidePanel__title}>
             Problemi na čekanju
           </Typography>
@@ -106,6 +108,12 @@ const SidePanel = () => {
                 {user && user[0].role === 'admin' && renderCircles}
             </List>
           </div>
+        </>
+    ) : <CircularProgress />
+
+    return (
+        <Box className={classes.sidePanel}>
+            {content}
         </Box>
     )
 }

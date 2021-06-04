@@ -67,9 +67,11 @@ const UserContextProvider = ({children}) => {
     }, [])
 
     const getUser = useCallback(() => {
+        setIsUserLoading(true)
         axios('/users/me')
         .then(res => {
             if(res.status === 200) {
+                setIsUserLoading(false)
                 setUser(res.data.user)
             }
         })

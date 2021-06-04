@@ -84,8 +84,12 @@ const GeometryContextProvider = ({children}) => {
     }
 
     const fetchMarkers = useCallback(() => {
+        setGeometryLoading(true)
         axios('/markers').then(res => {
-            setMarkers(res.data.markers)
+            if(res.status === 200) {
+                setGeometryLoading(false)
+                setMarkers(res.data.markers)
+            }
         }).catch(err => {
             console.log(err.response)
         })

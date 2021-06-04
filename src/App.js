@@ -15,7 +15,6 @@ import SidePanel from './components/SidePanel';
 import {Container} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import jwtDecode from 'jwt-decode'
-import Loader from './components/CircularProgress'
 import GuardedRoute from './utils/GuardedRoute'
 
 const useStyles = makeStyles(theme => ({
@@ -36,7 +35,7 @@ const useStyles = makeStyles(theme => ({
 function App() {
   const [url, setUrl] = useState('/')
   const {fetchMarkers, fetchCircles} = useGeometry()
-  const {authenticated, setAuthenticated, getUser, logout, isUserLoading} = useUsers()
+  const {authenticated, setAuthenticated, getUser, logout} = useUsers()
   const classes = useStyles()
   const history = useHistory()
   
@@ -76,7 +75,7 @@ function App() {
     </Switch>
   )
 
-  const isAppLoading = !isUserLoading ? (
+  const isAppLoading = (
       <ThemeProvider theme={theme}>
         <Appbar />
         <Container className={classes.root__flex}>
@@ -84,9 +83,7 @@ function App() {
           {routes}
         </Container>
       </ThemeProvider>
-  ) : (
-    <Loader />
-  )
+  ) 
 
   return (
     <div className="app">
