@@ -35,7 +35,7 @@ const categories = [
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    height: '100%',
+    minHeight: '50vh',
     width: '100%'
   }
 }))
