@@ -8,8 +8,8 @@ import GeometryContext from './context/GeometryContext'
 import UserContext from './context/UserContext'
 import {BrowserRouter as Router} from 'react-router-dom'
 
-axios.defaults.baseURL = 'http://localhost:8000/api/v1'
-// axios.defaults.baseURL = 'https://mapital-backend.herokuapp.com/api/v1'
+// axios.defaults.baseURL = 'http://localhost:8000/api/v1'
+axios.defaults.baseURL = 'https://mapital-backend.herokuapp.com/api/v1'
 
 const MyApp = () => {
   return (
