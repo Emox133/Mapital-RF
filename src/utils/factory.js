@@ -1,29 +1,29 @@
 import axios from 'axios'
 
-export const createMarker = (e, setLoading, closeDialog, requestDidSucceed, data) => {
-    const { _latlng } = e.layer
-    const latLng = [_latlng.lat, _latlng.lng]
-    data.append('latLng', latLng)
+// export const createMarker = (e, setLoading, closeDialog, requestDidSucceed, data) => {
+//     const { _latlng } = e.layer
+//     const latLng = [_latlng.lat, _latlng.lng]
+//     data.append('latLng', latLng)
 
-    axios({
-        method: "post",
-        url: "/markers",
-        data,
-        headers: { "Content-Type": "multipart/form-data" }
-    }).then(setLoading(true)).then(res => {
-        // CLOSE DIALOG
-        if (res.status === 201) {
-            closeDialog()
-            setLoading(false)
-            requestDidSucceed()
-            setTimeout(() => {
-                window.location.reload()
-            }, 2000)
-        }
-    }).catch(err => {
-        console.log(err.response)
-    })
-}
+//     axios({
+//         method: "post",
+//         url: "/markers",
+//         data,
+//         headers: { "Content-Type": "multipart/form-data" }
+//     }).then(setLoading(true)).then(res => {
+//         // CLOSE DIALOG
+//         if (res.status === 201) {
+//             closeDialog()
+//             setLoading(false)
+//             requestDidSucceed()
+//             // setTimeout(() => {
+//             //     window.location.reload()
+//             // }, 2000)
+//         }
+//     }).catch(err => {
+//         console.log(err.response)
+//     })
+// }
 
 export const createCircle = (e, description, setLoading, requestDidSucceed, closeDialog) => {
     const { lat, lng } = e.layer._latlng

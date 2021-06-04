@@ -11,7 +11,7 @@ import {useGeometry} from './../context/GeometryContext'
 import {ValidateIsEmpty} from './../utils/helpers'
 import AlertDialog from './AlertDialog';
 import Loader from './CircularProgress'
-import * as factory from './../utils/factory'
+// import * as factory from './../utils/factory'
 import { makeStyles } from '@material-ui/core/styles';
 
 const categories = [
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
 export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent}) {
   const [alertOpen, setAlertOpen] = useState(false)
   const [requestSucceded, setRequestSucceded] = useState(false)
-  const {geometryLoading, setGeometryLoading} = useGeometry()
+  const {createMarker, geometryLoading, setGeometryLoading} = useGeometry()
   const classes = useStyles()
 
   const handleClose = () => {
@@ -108,7 +108,7 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     }
 
     // 2) & 3) Create marker in DB / Close dialog
-    factory.createMarker(mapEvent, setGeometryLoading, handleClose, handleRequest, formData)
+    createMarker(mapEvent, setGeometryLoading, handleClose, handleRequest, formData)
   }
 
   return (

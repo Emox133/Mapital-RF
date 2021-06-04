@@ -50,11 +50,37 @@ const GeometryContextProvider = ({children}) => {
                 if(!ValidateIsEmpty(category, description)) return
             
                 // 3) Send request to the server / create marker
-                factory.createMarker(e)
+                createMarker(e)
             break;
     
             default: return e.layerType
         }
+    }
+
+    const createMarker = (e, setLoading, closeDialog, requestDidSucceed, data) => {
+        const { _latlng } = e.layer
+        const latLng = [_latlng.lat, _latlng.lng]
+        data.append('latLng', latLng)
+    
+        axios({
+            method: "post",
+            url: "/markers",
+            data,
+            headers: { "Content-Type": "multipart/form-data" }
+        }).then(setLoading(true)).then(res => {
+            // CLOSE DIALOG
+            if (res.status === 201) {
+                closeDialog()
+                setLoading(false)
+                requestDidSucceed()
+                setMarkers(prevState => [
+                    ...prevState,
+                    res.data.newMarker
+                ])
+            }
+        }).catch(err => {
+            console.log(err.response)
+        })
     }
 
     const fetchMarkers = useCallback(() => {
@@ -77,6 +103,7 @@ const GeometryContextProvider = ({children}) => {
         satelliteView,
         setSatelliteView,
         createGeometry,
+        createMarker,
         drawCreatedEvent,
         fetchMarkers,
         markers,
