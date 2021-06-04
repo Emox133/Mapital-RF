@@ -20,7 +20,6 @@ import GuardedRoute from './utils/GuardedRoute'
 
 const useStyles = makeStyles(theme => ({
   root__flex: {
-    minHeight: 'calc(100vh - 64px)',
     width: '100vw',
     maxWidth: '100vw',
     display: 'flex',
