@@ -124,7 +124,7 @@ code {
 
 @media screen and (max-width: 600px) {
   .leaflet-container {
-    height: 65vh;
+    height: 55vh;
     width: 100vw;
   }
 }

@@ -11,7 +11,7 @@ import { useUsers } from '../context/UserContext'
 
 const useStyles = makeStyles(theme => ({
     sidePanel: {
-        height: '35vh',
+        height: '45vh',
         width: '100vw',
         order: '1',
         background: '#f5f5f5',
