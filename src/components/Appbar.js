@@ -5,6 +5,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import {Link, useHistory} from 'react-router-dom'
 import { useUsers } from '../context/UserContext';
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,13 +27,17 @@ export default function ButtonAppBar() {
 
   let authAppbar = !authenticated ? (
     <Toolbar>
+      <Button color="inherit" component={Link} to="/">
+        <HomeIcon />
+      </Button>
       <Button color="inherit" component={Link} to="/signup">Signup</Button>
-      <Button color="inherit" component={Link} to="/">Home</Button>
       <Button color="inherit" component={Link} to="/login">Login</Button>
     </Toolbar>
   ) : (
     <Toolbar>
-      <Button color="inherit" onClick={logout.bind(null, history)}>Logout</Button>
+      <Button color="inherit" onClick={logout.bind(null, history)}>
+        Logout <ExitToAppIcon style={{marginLeft: '.2rem'}} />
+      </Button>
     </Toolbar>
   )
 

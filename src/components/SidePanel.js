@@ -11,13 +11,15 @@ import { useUsers } from '../context/UserContext'
 
 const useStyles = makeStyles(theme => ({
     sidePanel: {
-        height: '55vh',
+        height: '35vh',
         width: '100vw',
+        order: '1',
         background: '#f5f5f5',
         overflowY: 'scroll',
         [theme.breakpoints.up('sm')]: {
             height: '100vh',
-            width: '25vw'
+            width: '25vw',
+            order: '0',
         }
     },
     sidePanel__image: {

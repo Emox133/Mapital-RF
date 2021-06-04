@@ -20,7 +20,8 @@ import GuardedRoute from './utils/GuardedRoute'
 
 const useStyles = makeStyles(theme => ({
   root__flex: {
-    height: 'calc(100vh - 64px)',
+    // height: 'calc(100vh + 64px)',
+    height: '95vh',
     width: '100vw',
     maxWidth: '100vw',
     display: 'flex',
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme => ({
     padding: 0,
     overflow: 'hidden',
     [theme.breakpoints.up('sm')]: {
+      height: 'calc(100vh - 64px)',
       flexDirection: 'row'
     }
   }

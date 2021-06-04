@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
     screen: {
-        height: 'calc(100vh - 64px)',
+        // height: 'calc(100vh - 64px)',
         width: '100vw',
         overflow: 'hidden'
     },
