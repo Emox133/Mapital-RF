@@ -11,11 +11,13 @@ import {makeStyles} from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
   details__box: {
-    width: '100%'
+    width: '100%',
+    height: 450
   },
   details__image: {
     borderRadius: '.3rem',
     width: '100%',
+    height: '95%',
     [theme.breakpoints.up('sm')]: {
       width: 400
     }

@@ -10,7 +10,6 @@ import Appbar from './components/Appbar'
 import Home from './pages/Home';
 import {useGeometry} from './context/GeometryContext'
 import {useUsers} from './context/UserContext'
-// import {useUsers} from './context/UserContext'
 import SidePanel from './components/SidePanel';
 import {Container} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'

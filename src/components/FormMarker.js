@@ -11,7 +11,6 @@ import {useGeometry} from './../context/GeometryContext'
 import {ValidateIsEmpty} from './../utils/helpers'
 import AlertDialog from './AlertDialog';
 import Loader from './CircularProgress'
-// import * as factory from './../utils/factory'
 import { makeStyles } from '@material-ui/core/styles';
 
 const categories = [
@@ -93,10 +92,8 @@ export default function FormDialog({open, setIsOpen, fields, setFields, mapEvent
     formData.append('description', fields.description)
     formData.append('category', fields.category)
     formData.append('photo', fields.photo); 
-
-    const dataArr = [...formData]
-    const data = Object.fromEntries(dataArr)
-    const {category, description} = data
+    
+    const {category, description} = fields
     
     // 1) Check if the fields are empty
     if(!ValidateIsEmpty(category, description)) {
