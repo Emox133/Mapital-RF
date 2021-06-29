@@ -41,7 +41,9 @@ const MarkerComponent = () => {
 
         return <Marker key={marker._id} position={marker.latLng} icon={icon} eventHandlers={{
             click: (e) => {
-                setOpen(true)
+                setTimeout(() => {
+                    setOpen(true)
+                }, [300])
                 setSelectedMarker(marker)
                 setMapView(marker.latLng)
             }

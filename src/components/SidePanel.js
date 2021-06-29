@@ -15,14 +15,32 @@ const useStyles = makeStyles(theme => ({
         height: '45vh',
         width: '100vw',
         order: '1',
-        background: '#f5f5f5',
+        background: '#fff',
         overflowY: 'scroll',
         position: 'relative',
+        [theme.breakpoints.up('sm')]: {
+            height: '100vh',
+            width: '60vw',
+            order: '0',
+        },
         [theme.breakpoints.up('md')]: {
+            height: '100vh',
+            width: '35vw',
+            order: '0',
+        },
+        [theme.breakpoints.up('lg')]: {
             height: '100vh',
             width: '25vw',
             order: '0',
         }
+    },
+    sidePanel__close_box: {
+        position: 'relative'
+    },
+    sidePanel__close_box_icon: {
+        position: 'absolute',
+        right: '.5rem',
+        top: '.5rem'
     },
     sidePanel__image: {
         height: 30,
@@ -44,7 +62,7 @@ const useStyles = makeStyles(theme => ({
 
 const SidePanel = () => {
     const classes = useStyles()
-    const {geometryLoading, markers, circles, setMapView} = useGeometry()
+    const {geometryLoading, markers, circles, setMapView, filteredFields} = useGeometry()
     const {user} = useUsers()
 
     const renderMarkers = markers.map(marker => {
@@ -104,8 +122,8 @@ const SidePanel = () => {
           </Typography>
           <div className={classes.demo}>
             <List>
-                {renderMarkers}
-                {user && user[0].role === 'admin' && renderCircles}
+                {filteredFields.markers && renderMarkers}
+                {filteredFields.circles && user && user[0].role === 'admin' && renderCircles}
             </List>
           </div>
         </>

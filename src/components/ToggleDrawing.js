@@ -30,7 +30,7 @@ const ToggleDrawing = () => {
             </Box>
             <DrawingPanel isOpen={open} />
             <AlertDialog isOpen={open} type="success" width={isActive ? '70%' : '45%'}>
-                Zahvaljujemo Vam se na unapređenju Sigurnih Staza Živinice!
+                Zahvaljujemo vam se na doprinosu gradu Živinice
             </AlertDialog>
         </>
     )

@@ -22,7 +22,9 @@ const CircleComponent = () => {
             <Fragment key={circle._id}>
                 <Circle center={circle.coordinates} radius={circle.radius} eventHandlers={{
                     click: (e) => {
-                        setOpen(true)
+                        setTimeout(() => {
+                            setOpen(true)
+                        }, 300)
                         setSelectedCircle(circle)
                         setMapView(circle.coordinates)
                     }

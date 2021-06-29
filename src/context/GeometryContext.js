@@ -16,6 +16,10 @@ const GeometryContextProvider = ({children}) => {
     const [circles, setCircles] = useState([])
     const [mapView, setMapView] = useState([44.44929, 18.64978])
     const [geometryLoading, setGeometryLoading] = useState(false)
+    const [filteredFields, setFilteredFields] = useState({
+        markers: true,
+        circles: true
+    })
 
     const createGeometry = (e, fn, fields) => {
         setDrawCreatedEvent(e)
@@ -116,7 +120,9 @@ const GeometryContextProvider = ({children}) => {
         mapView,
         setMapView,
         setGeometryLoading,
-        geometryLoading
+        geometryLoading,
+        filteredFields,
+        setFilteredFields
     }
 
     return (

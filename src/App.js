@@ -15,6 +15,7 @@ import {Container} from '@material-ui/core'
 import {makeStyles} from '@material-ui/core/styles'
 import jwtDecode from 'jwt-decode'
 import GuardedRoute from './utils/GuardedRoute'
+import FilterPanel from './components/FilterPanel';
 
 const useStyles = makeStyles(theme => ({
   root__flex: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     padding: 0,
     overflow: 'hidden',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       height: 'calc(100vh - 64px)',
       flexDirection: 'row'
     }
@@ -78,7 +79,12 @@ function App() {
       <ThemeProvider theme={theme}>
         <Appbar />
         <Container className={classes.root__flex}>
-          {url === '/map' && <SidePanel />}
+          {url === '/map' && (
+            <>
+              <SidePanel />
+              <FilterPanel />
+            </>
+          )}
           {routes}
         </Container>
       </ThemeProvider>

@@ -63,7 +63,7 @@ const Home = () => {
         <Grid container className={classes.screen}>
             <Grid item xs={12} md={6} className={classes.content__box}>
                 <Box>
-                    <Typography className={classes.content__title} variant="h2">
+                    <Typography className={classes.content__title} variant="h2" color="primary">
                         Mapital
                     </Typography>
                     <Typography style={{color: '#666'}} variant="h6" className={classes.content__subtitle}>
