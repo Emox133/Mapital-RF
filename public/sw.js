@@ -4,8 +4,8 @@ const dynamicFilesCache = 'dynamic-cache-v1'
 const staticAssets = [
     // 'http://localhost:3000/static/js/vendors~main.chunk.js'
     // './index.html'
-    // './fallback.html',
-    // './fallback.css'
+    './fallback.html',
+    './fallback.css'
 
 ]
 
@@ -14,10 +14,10 @@ self.addEventListener('install', e => {
     console.log('Service worker installed')
     e.waitUntil(
         caches.open(staticFilesCache)
-        .then(cache => {
-            console.log('Caching assets...')
-            cache.addAll(staticAssets)
-        })
+            .then(cache => {
+                console.log('Caching assets...')
+                cache.addAll(staticAssets)
+            })
     )
 })
 
@@ -26,7 +26,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
     e.waitUntil(
         caches.keys().then(keys => {
-           return Promise.all(keys
+            return Promise.all(keys
                 .filter(key => key !== staticFilesCache && key !== dynamicFilesCache)
                 .map(key => caches.delete(key))
             )
