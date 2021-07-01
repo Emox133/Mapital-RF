@@ -5,9 +5,7 @@ const staticAssets = [
     // 'http://localhost:3000/static/js/vendors~main.chunk.js'
     // './index.html'
     // './fallback.html',
-    // './fallback.css',
-    'https://mapital-backend.herokuapp.com/api/v1/circles',
-    'https://mapital-backend.herokuapp.com/api/v1/markers'
+    // './fallback.css'
 
 ]
 
@@ -48,7 +46,7 @@ self.addEventListener('fetch', e => {
                                 cache.put(e.request.url, fetchRes.clone())
                                 return fetchRes
                             })
-                    })
+                    }).catch(() => caches.match('/fallback.html'))
             })
     )
 })
