@@ -94,4 +94,11 @@ body {
   .output::before {
     content: "> ";
   }
+
+  #reload {
+    background: #fff;
+    border: none;
+    padding: .7rem;
+    border-radius: .3rem;
+  }
   
