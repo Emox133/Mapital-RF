@@ -4,7 +4,7 @@ const dynamicFilesCache = 'dynamic-cache-v1'
 const staticAssets = [
     './fallback.html',
     './fallback.css',
-    'https://mapital-backend.herokuapp.com/api/v1/map-lg.png'
+    'https://mapital-rf.vercel.app/static/media/map.4d52fb26.svg'
 ]
 
 const deleteCacheAfter = (removalDate = 15) => {
