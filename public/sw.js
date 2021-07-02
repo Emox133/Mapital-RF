@@ -2,12 +2,27 @@ const staticFilesCache = 'static-cache-v1'
 const dynamicFilesCache = 'dynamic-cache-v1'
 
 const staticAssets = [
-    // 'http://localhost:3000/static/js/vendors~main.chunk.js'
-    // './index.html'
     './fallback.html',
-    './fallback.css'
-
+    './fallback.css',
+    'https://mapital-backend.herokuapp.com/api/v1/map-lg.png'
 ]
+
+const deleteCacheAfter = (removalDate = 15) => {
+    if(new Date().getDate() === removalDate || new Date().getDate() === removalDate * 2) {
+        return true
+    }
+    return false
+}
+
+const limitCacheSize = (name, size = 15) => {
+    caches.open(name).then(cache => {
+        cache.keys().then(keys => {
+            if(keys.length > size && deleteCacheAfter()) {
+                cache.delete(keys[0]).then(limitCacheSize(name, size))
+            }
+        })
+    })
+}
 
 // INSTALL SERVICE WORKER
 self.addEventListener('install', e => {
@@ -43,6 +58,7 @@ self.addEventListener('fetch', e => {
                     .then(fetchRes => {
                         return caches.open(dynamicFilesCache)
                             .then(cache => {
+                                limitCacheSize(dynamicFilesCache)
                                 cache.put(e.request.url, fetchRes.clone())
                                 return fetchRes
                             })

@@ -3,11 +3,8 @@ import axios from 'axios'
 import { ThemeProvider } from '@material-ui/core/styles';
 import {Switch, Route, useHistory} from 'react-router-dom'
 import {theme} from './utils/theme'
-import Map from './components/Map'
-import Signup from './pages/Signup';
-import Login from './pages/Login';
+import Loader from './components/CircularProgress'
 import Appbar from './components/Appbar'
-import Home from './pages/Home';
 import {useGeometry} from './context/GeometryContext'
 import {useUsers} from './context/UserContext'
 import SidePanel from './components/SidePanel';
@@ -16,6 +13,13 @@ import {makeStyles} from '@material-ui/core/styles'
 import jwtDecode from 'jwt-decode'
 import GuardedRoute from './utils/GuardedRoute'
 import FilterPanel from './components/FilterPanel';
+import ErrorBoundary from './utils/ErrorBoundary';
+import NoConnection from './utils/NoConnection';
+
+const Home = React.lazy(() => import('./pages/Home'))
+const Signup = React.lazy(() => import('./pages/Signup'))
+const Login = React.lazy(() => import('./pages/Login'))
+const Map = React.lazy(() => import('./components/Map'))
 
 const useStyles = makeStyles(theme => ({
   root__flex: {
@@ -38,7 +42,7 @@ function App() {
   const {authenticated, setAuthenticated, getUser, logout} = useUsers()
   const classes = useStyles()
   const history = useHistory()
-  
+    
   history.listen((location, action) => {
       setUrl(location.pathname)
   })
@@ -62,17 +66,23 @@ function App() {
   }, [token, logout, history, setAuthenticated, getUser])
 
   useEffect(() => {
-    fetchMarkers()
-    fetchCircles()
-  }, [fetchMarkers, fetchCircles])
+    if(url === '/map') {
+      fetchMarkers()
+      fetchCircles()
+    }
+  }, [fetchMarkers, fetchCircles, url])
 
   const routes = (
-    <Switch>
-        <GuardedRoute exact path="/" component={Home} auth={!authenticated} />
-        <Route path="/map" component={Map} />
-        <GuardedRoute path="/signup" component={Signup} auth={!authenticated} />
-        <GuardedRoute path="/login" component={Login} auth={!authenticated} />
-    </Switch>
+    <ErrorBoundary>
+      <React.Suspense fallback={<Loader />}>
+        <Switch>
+            <GuardedRoute exact path="/" component={Home} auth={!authenticated} />
+            <Route path="/map" component={Map} />
+            <GuardedRoute path="/signup" component={Signup} auth={!authenticated} />
+            <GuardedRoute path="/login" component={Login} auth={!authenticated} />
+        </Switch>
+      </React.Suspense>
+    </ErrorBoundary>
   )
 
   const isAppLoading = (
@@ -85,6 +95,7 @@ function App() {
               <FilterPanel />
             </>
           )}
+          <NoConnection />
           {routes}
         </Container>
       </ThemeProvider>
